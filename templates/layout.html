@@ -10,13 +10,15 @@
     {% else  %}
        <title>Website</title>
     {% endif %}
-    
+
 </head>
 <body>
+	{% include 'includes/_navbar.html' %}
 	<div>
 		{% block content%}
         {% endblock %}
 	</div>
+	{% include 'includes/_footer.html' %}
 
 
 	<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
