@@ -11,6 +11,16 @@ def home():
 	return render_template("home.html")
 
 
+@app.route('/about')
+def about():
+	return render_template("about.html", title="About Page")
+
+
+
+
+@app.route('/contactus')
+def contactus():
+	return render_template("contactus.html", title="Contact Us Page")
 
 
 
