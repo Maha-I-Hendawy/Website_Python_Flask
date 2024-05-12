@@ -1,8 +1,10 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, url_for, redirect, flash
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_object('config')
+app.config.from_pyfile('config.py')
 
 
 
@@ -18,11 +20,17 @@ def about():
 
 
 
-@app.route('/contactus')
+@app.route('/contactus', methods=['GET', 'POST'])
 def contactus():
+	if request.method == 'POST':
+		name = request.form.get('name')
+		email = request.form.get('email')
+		msg = request.form.get('msg')
+		print(f"Message: {msg}, From: {name} with Email: {email}")
+		flash("Your message has been sent.")
+		return redirect(request.url)
+
 	return render_template("contactus.html", title="Contact Us Page")
 
 
 
-if __name__ == '__main__':
-	app.run(debug=True)
